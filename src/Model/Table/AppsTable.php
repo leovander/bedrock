@@ -10,10 +10,6 @@ use Cake\Validation\Validator;
 /**
  * Apps Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Apps
- * @property \Cake\ORM\Association\BelongsTo $Authors
- * @property \Cake\ORM\Association\BelongsTo $Categories
- * @property \Cake\ORM\Association\HasMany $Apps
  */
 class AppsTable extends Table
 {
@@ -28,23 +24,7 @@ class AppsTable extends Table
     {
         $this->table('apps');
         $this->displayField('name');
-        $this->primaryKey('id');
-        $this->addBehavior('Timestamp');
-        $this->belongsTo('Apps', [
-            'foreignKey' => 'app_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Authors', [
-            'foreignKey' => 'author_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->belongsTo('Categories', [
-            'foreignKey' => 'category_id',
-            'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Apps', [
-            'foreignKey' => 'app_id'
-        ]);
+        $this->primaryKey('appId');
     }
 
     /**
@@ -56,16 +36,38 @@ class AppsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->allowEmpty('appId', 'create');
+            
+        $validator
+            ->requirePresence('author', 'create')
+            ->notEmpty('author');
+            
+        $validator
+            ->requirePresence('category_color', 'create')
+            ->notEmpty('category_color');
+            
+        $validator
+            ->requirePresence('categoryId', 'create')
+            ->notEmpty('categoryId');
+            
+        $validator
+            ->requirePresence('category_name', 'create')
+            ->notEmpty('category_name');
+            
+        $validator
+            ->requirePresence('changelog', 'create')
+            ->notEmpty('changelog');
             
         $validator
             ->allowEmpty('description');
             
         $validator
-            ->add('published_date', 'valid', ['rule' => 'date'])
-            ->requirePresence('published_date', 'create')
-            ->notEmpty('published_date');
+            ->requirePresence('developerId', 'create')
+            ->notEmpty('developerId');
+            
+        $validator
+            ->requirePresence('header', 'create')
+            ->notEmpty('header');
             
         $validator
             ->add('hearts', 'valid', ['rule' => 'numeric'])
@@ -73,33 +75,50 @@ class AppsTable extends Table
             ->notEmpty('hearts');
             
         $validator
+            ->requirePresence('icon', 'create')
+            ->notEmpty('icon');
+            
+        $validator
+            ->add('latest_release_date', 'valid', ['rule' => 'datetime'])
+            ->requirePresence('latest_release_date', 'create')
+            ->notEmpty('latest_release_date');
+            
+        $validator
+            ->requirePresence('latest_release', 'create')
+            ->notEmpty('latest_release');
+            
+        $validator
+            ->requirePresence('list_image', 'create')
+            ->notEmpty('list_image');
+            
+        $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
             
         $validator
-            ->requirePresence('url', 'create')
-            ->notEmpty('url');
+            ->add('published_date', 'valid', ['rule' => 'datetime'])
+            ->requirePresence('published_date', 'create')
+            ->notEmpty('published_date');
             
         $validator
-            ->add('type', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('screenshots', 'create')
+            ->notEmpty('screenshots');
+            
+        $validator
+            ->requirePresence('share_link', 'create')
+            ->notEmpty('share_link');
+            
+        $validator
             ->requirePresence('type', 'create')
             ->notEmpty('type');
+            
+        $validator
+            ->allowEmpty('url');
+            
+        $validator
+            ->requirePresence('uuid', 'create')
+            ->notEmpty('uuid');
 
         return $validator;
-    }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['app_id'], 'Apps'));
-        $rules->add($rules->existsIn(['author_id'], 'Authors'));
-        $rules->add($rules->existsIn(['category_id'], 'Categories'));
-        return $rules;
     }
 }

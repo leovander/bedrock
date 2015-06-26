@@ -8,10 +8,6 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Apps'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Authors'), ['controller' => 'Authors', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Author'), ['controller' => 'Authors', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
     </ul>
 </div>
 <div class="apps form large-10 medium-9 columns">
@@ -19,15 +15,27 @@
     <fieldset>
         <legend><?= __('Edit App') ?></legend>
         <?php
-            echo $this->Form->input('app_id');
-            echo $this->Form->input('author_id', ['options' => $authors]);
-            echo $this->Form->input('category_id', ['options' => $categories]);
+            echo $this->Form->input('appId');
+            echo $this->Form->input('author');
+            echo $this->Form->input('category_color');
+            echo $this->Form->input('categoryId');
+            echo $this->Form->input('category_name');
+            echo $this->Form->input('changelog');
             echo $this->Form->input('description');
-            echo $this->Form->input('published_date');
+            echo $this->Form->input('developerId');
+            echo $this->Form->input('header');
             echo $this->Form->input('hearts');
+            echo $this->Form->input('icon');
+            echo $this->Form->input('latest_release_date');
+            echo $this->Form->input('latest_release');
+            echo $this->Form->input('list_image');
             echo $this->Form->input('name');
-            echo $this->Form->input('url');
+            echo $this->Form->input('published_date');
+            echo $this->Form->input('screenshots');
+            echo $this->Form->input('share_link');
             echo $this->Form->input('type');
+            echo $this->Form->input('url');
+            echo $this->Form->input('uuid');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

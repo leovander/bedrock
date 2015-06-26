@@ -16,10 +16,7 @@ class AppsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.apps',
-        'app.authors',
-        'app.developers',
-        'app.categories'
+        'app.apps'
     ];
 
     /**
@@ -48,6 +45,16 @@ class AppsControllerTest extends IntegrationTestCase
      * @return void
      */
     public function testAdd()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test removeSizingParams method
+     *
+     * @return void
+     */
+    public function testRemoveSizingParams()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

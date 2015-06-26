@@ -17,10 +17,7 @@ class AppsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.apps',
-        'app.authors',
-        'app.developers',
-        'app.categories'
+        'app.apps'
     ];
 
     /**
@@ -63,16 +60,6 @@ class AppsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
